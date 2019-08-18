@@ -1,0 +1,9 @@
+
+<div class="panel panel-info">
+    <div class="panel-heading">日期归档</div>
+    <div class="panel-body">
+        {% for archive in archive_list %}
+            <p>{{ archive.archive_ym }}({{ archive.c }})</p>
+        {% endfor %}
+    </div>
+</div>

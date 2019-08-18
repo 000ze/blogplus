@@ -1,0 +1,128 @@
+<!-- 模块详情页，会被home.html动态加载 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ blog.title }}</title>
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/fontawesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/static/mystyle.css">
+    <link href="/static/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/123456.css">
+
+
+    <link rel="icon" href="/static/fav.ico">
+    <style type="text/css">
+        body{
+            margin-top:80px
+        }
+
+    </style>
+
+</head>
+<body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+            aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/blog/index/">B.I.T</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-left">
+            <li></li>
+            <li><a href="/blog/Python">Python</a></li>
+            <li><a href="/blog/Django">Django</a></li>
+            <li><a href="/blog/Scrapy">Scrapy</a></li>
+            <li><a href="/blog/Computer">Computer</a></li>
+            <li><a href="/blog/Thinking">Thinking</a></li>
+            <li><a href="/blog/Book">Book</a></li>
+
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            {% if request.user.username %}
+
+            <li><a href="/admin/">{{ request.user.username }}</a></li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                aria-expanded="false">个人中心<span class="caret"></span></a>
+
+                <ul class="dropdown-menu">
+                     <li><a href="/blog/About">About</a></li>
+                    <li><a href="/log_in/">订单系统</a></li>
+                    <li><a href="/logout/">注销</a></li>
+                </ul>
+            </li>
+            {% else %}
+            <li><a href="/login/">登录</a></li>
+            <li><a href="/reg/">注册</a></li>
+            {% endif %}
+        </ul>
+    </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</nav>
+<div class="container">
+<div class="form-group">
+    <div class="col-md-3 ">
+        {% load my_tags %}
+
+        {% get_left_menu category %}
+    </div>
+    <div class="col-md-7">
+        {% block page-main %}
+
+        {% endblock %}
+    </div>
+<div class="col-md-2 ">
+			<ul class="nav nav-sidebar">
+				<ul>  {% for article in articles %}
+					<li><a
+						href="/blog/{{ category }}/article/{{ article.pk }}/"
+						rel="bookmark">{{ article.title }}
+					</a>
+				</li>  {% endfor %}
+
+
+			</ul>
+		</ul>
+	</div>
+
+ </div>
+
+
+
+
+</div>
+<footer class="bg-dark footer-section">
+    <div class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5 class="text-light">Email</h5>
+                    <p class="text-white paragraph-lg font-secondary">steve.fruits@email.com</p>
+                </div>
+                <div class="col-md-4">
+                    <h5 class="text-light">Phone</h5>
+                    <p class="text-white paragraph-lg font-secondary">+880 2544 658 256</p>
+                </div>
+                <div class="col-md-4">
+                    <h5 class="text-light">Address</h5>
+                    <p class="text-white paragraph-lg font-secondary">125/A, CA Commercial Area, California, USA</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="border-top text-center border-dark py-5">
+        <p class="mb-0 text-light">Copyright © 2019.Company name All rights reserved.</p>
+    </div>
+</footer>
+<script src="/static/jquery-3.3.1.js"></script>
+<script src="/static/bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>

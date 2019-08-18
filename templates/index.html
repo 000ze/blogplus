@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html >
+<head>
+ <!DOCTYPE html>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>B.I.T</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/fontawesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/static/mystyle.css">
+    <link rel="stylesheet" href="/static/component-chosen.css">
+    <link rel="stylesheet" href="/static/bootstrap-4.2.1.css">
+    <link rel="stylesheet" href="/static/slick.css">
+    <link rel="stylesheet" href="/static/themify-icons.css">
+    <link href="/static/style.css" rel="stylesheet">
+    <link rel="icon" href="/static/fav.ico">
+
+<style type="text/css">
+
+         .media-image {
+            width: 20px;
+            height: 20px;
+        }
+
+        #scroll {
+
+        position:fixed; top:300px; right:100px;
+
+        }
+
+
+
+        .scrollItem {
+
+        width:20px; height:70px;border:#e1e1e1 1px solid; cursor:pointer; text-align:center; padding-top:10px;
+
+        }
+
+    </style>
+</head>
+
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+            aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/blog/index/">B.I.T</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-left">
+            <li></li>
+            <li><a href="/blog/Python">Python</a></li>
+            <li><a href="/blog/Django">Django</a></li>
+            <li><a href="/blog/Scrapy">Scrapy</a></li>
+            <li><a href="/blog/Computer">Computer</a></li>
+            <li><a href="/blog/Thinking">Thinking</a></li>
+            <li><a href="/blog/Book">Book</a></li>
+
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            {% if request.user.username %}
+
+            <li><a href="/admin/">{{ request.user.username }}</a></li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                aria-expanded="false">个人中心<span class="caret"></span></a>
+
+                <ul class="dropdown-menu">
+                    <li><a href="/blog/About">About</a></li>
+                    <li><a href="/log_in/">订单系统</a></li>
+                    <li><a href="/logout/">注销</a></li>
+
+                </ul>
+            </li>
+            {% else %}
+            <li><a href="/login/">登录</a></li>
+            <li><a href="/reg/">注册</a></li>
+            {% endif %}
+        </ul>
+    </div>
+</div>
+</nav>
+</header>
+
+
+<section class="page-title bg-primary position-relative">
+    <div class="container">
+        <div class="row">
+            <div class="col-5 text-center">
+                <h1 class="text-white font-tertiary">Blogs</h1>
+            </div>
+        </div>
+    </div>
+
+    <img src="/media/page-title.png" alt="illustrations" class="bg-shape-1 w-100">
+    <img src="/media/leaf-pink-round.png" alt="illustrations" class="bg-shape-2">
+    <img src="/media/dots-cyan.png" alt="illustrations" class="bg-shape-3">
+    <img src="/media/leaf-orange.png" alt="illustrations" class="bg-shape-4">
+    <img src="/media/leaf-yellow.png" alt="illustrations" class="bg-shape-5">
+    <img src="/media/dots-group-cyan.png" alt="illustrations" class="bg-shape-6">
+    <img src="/media/leaf-cyan-lg.png" alt="illustrations" class="bg-shape-7">
+</section>
+
+
+<section class="section">
+    <div class="container">
+        <div class="row">
+         {% for article in article_list %}
+            <div class="col-lg-4 col-sm-6 mb-4">
+                <article class="card shadow">
+                    <img class="rounded card-img-top" src="/media/Penguins_356x356.jpg" alt="post-thumb">
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            {% for category in article.category.all %}
+                            <a class="text-dark"   href="/blog/{{ category }}/article/{{ article.pk }}/">{{ article.title }}</a>
+                        </h4>
+                        <div class="entry-meta">
+                            <time>{{ article.create_time|date:'Y-m-d H:i:s'}}</time>
+                            <span class="byline"><span
+                                    class="author vcard"
+                                    itemscope>by </span>
+                                <img class="media-image"
+                                     src="/media/avatars/iconpng.ico" alt="...">
+                            </span>
+                            <span
+                                    class="author-name"
+                                    itemprop="name">ze
+
+                                                 </span>
+                        </div>
+                        <p class="cars-text">{{ article.content|truncatechars:100 }}</p>
+                        <a href="/blog/{{ category }}/article/{{ article.pk }}/"
+                           class="btn btn-xs btn-primary">Read More</a>
+                    </div>
+                </article>
+            </div>
+
+            {% endfor %}
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<div id="scroll">
+<div class="scrollItem" id="toTop">顶部</div>
+<div class="scrollItem" id="toBottom">底部</div>
+</div>
+
+
+
+               <nav aria-label="Page navigation" class="text-center">
+                    <ul class="pagination">
+                        <li>
+                            <a href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <li><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">5</a></li>
+                        <li>
+                            <a href="#" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+
+                </nav>
+
+
+<footer class="bg-dark footer-section">
+    <div class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5 class="text-light">Email</h5>
+                    <p class="text-white paragraph-lg font-secondary">steve.fruits@email.com</p>
+                </div>
+                <div class="col-md-4">
+                    <h5 class="text-light">Phone</h5>
+                    <p class="text-white paragraph-lg font-secondary">+880 2544 658 256</p>
+                </div>
+                <div class="col-md-4">
+                    <h5 class="text-light">Address</h5>
+                    <p class="text-white paragraph-lg font-secondary">125/A, CA Commercial Area, California, USA</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="border-top text-center border-dark py-5">
+        <p class="mb-0 text-light">Copyright © 2019.Company name All rights reserved.</p>
+    </div>
+</footer>
+
+<script src="/static/jquery-3.3.1.js"></script>
+<script src="/static/bootstrap/js/bootstrap.min.js"></script>
+<script src="/static/jquery.min.js.下载"></script>
+<script src="/static/jquery.min.js(1).下载"></script>
+
+
+<script type="text/javascript">
+
+        $(function () {
+            var speed = 800;//滚动速度
+
+            var h=document.body.clientHeight;
+
+
+
+            //回到顶部
+
+            $("#toTop").click(function () {
+
+                $('html,body').animate({
+
+                    scrollTop: '0px'
+
+                },
+
+                speed);
+
+            });
+
+            //回到底部
+
+            var windowHeight = parseInt($("body").css("height"));//整个页面的高度
+
+            $("#toBottom").click(function () {
+
+                //alert(h);
+
+                $('html,body').animate({
+
+                    scrollTop: h+'px'
+
+                },
+
+                speed);
+
+            });
+
+        });
+
+</script>
+</body>
+</html>

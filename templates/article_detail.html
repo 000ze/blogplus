@@ -1,0 +1,160 @@
+<!-- 文章详情页 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>B.I.T</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/fontawesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/static/mystyle.css">
+    <link rel="stylesheet" href="/static/component-chosen.css">
+    <link rel="stylesheet" href="/static/bootstrap-4.2.1.css">
+    <link rel="stylesheet" href="/static/slick.css">
+    <link rel="stylesheet" href="/static/themify-icons.css">
+    <link href="/static/style.css" rel="stylesheet">
+    <link rel="icon" href="/static/fav.ico">
+  <style type="text/css">
+        body{
+            margin-top:40px
+        }
+        .entry-content{
+             margin-top:40px	
+        }
+
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+            aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/blog/index/">B.I.T</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-left">
+            <li></li>
+            <li><a href="/blog/Python">Python</a></li>
+            <li><a href="/blog/Django">Django</a></li>
+            <li><a href="/blog/Scrapy">Scrapy</a></li>
+            <li><a href="/blog/Computer">Computer</a></li>
+            <li><a href="/blog/Thinking">Thinking</a></li>
+            <li><a href="/blog/Book">Book</a></li>
+
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            {% if request.user.username %}
+
+            <li><a href="/admin/">{{ request.user.username }}</a></li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                aria-expanded="false">个人中心<span class="caret"></span></a>
+
+                <ul class="dropdown-menu">
+                    <li><a href="/log_in/">订单系统</a></li>
+                    <li><a href="/logout/">注销</a></li>
+                </ul>
+            </li>
+            {% else %}
+            <li><a href="/login/">登录</a></li>
+            <li><a href="/reg/">注册</a></li>
+            {% endif %}
+        </ul>
+    </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</nav>
+
+
+    <div style="background:url(/media/home_top_bg.jpg)"
+         class="background-parallax triangle-effect h-100">
+        <div class="container-fluid zi-9 py-5">
+            {% for category in article.category.all %}
+                <hr >
+                <div class="row mb-5">
+                    <div class="col-8 offset-2 text-center mt-2">
+                        <div class="user-profile text-white">
+                            <img alt="" src="/media/buo.jpg">
+                            <div class="entry-meta">
+                                <p></p>
+                                <time>{{ article.create_time|date:'Y-m-d H:i:s'}}</time>
+                                <span class="byline"><span
+                                        class="author vcard"
+                                        itemscope>by ze</span>
+                            </span>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="categories col-12 text-center pb-5"><a
+                            href="/blog/{{ category }}"> {{ category }} </a>
+                    </div>
+                </div>
+            {% endfor %}
+
+        </div>
+    </div>
+
+
+
+<div class="container" role="document">
+    <div class="content">
+        <main class="main col-md-12 ">
+            <article>
+           <div class="col-sm-4">
+                <blockquote class="blockquote text-right">
+                    <p>
+                        选择比能力重要。
+                    </p>
+                    <footer class="blockquote-footer">
+                        Someone <cite></cite>
+                    </footer>
+                </blockquote>
+                <div class="col-sm-8">
+                <span id="jinrishici-sentence">正在加载今日诗词....</span>
+<script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+</div></div>
+
+
+                <div class="entry-content">
+                    <p>{{ article.content|safe }}</p>
+
+
+                    <p>The code is pretty straightforward. We try to import the module that does not support python
+                        3.5.2. This will fail. In this case we catch the error, import the class that we need, and put
+                        it inside the typings module. Once we do that, we will be able to import the module we
+                        originally wanted to, because now the module has its component defined.</p>
+                    <p>This can be seen as something “hacky”, and indeed it is. We are attaching foreign elements to the
+                        module just to be able to run under some circumstances. This should be avoided whenever
+                        possible. Explicitly coding your classes and modules to behave as they should is the best way to
+                        go.<br>However, there are valid cases where a simple monkey patch can save you a lot of effort
+                        to support edge cases. This is yet another useful tool to have in your belt when you have to
+                        attack a problem… use it wisely.</p></div>
+
+                   <div class="article-footer text-right">
+                    <span class="fa fa-commenting-o">评论({{ article.comment_count }})&emsp;</span>
+                    <span class="fa fa-thumbs-o-up">点赞({{ article.up_count }})</span>
+                    <div class="diggword" id="digg_tips" style="color: red;">
+                    	
+                    </div>
+                </div>
+
+            </article>
+        </main>
+    </div>
+</div>
+
+
+<script src="/static/jquery-3.3.1.js"></script>
+<script src="/static/bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>
